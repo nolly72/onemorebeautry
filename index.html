@@ -3,112 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AURA COSMIC | Салон красоты</title>
-
-    <!-- 1. ПОДКЛЮЧЕНИЕ ВАШИХ СТИЛЕЙ (Этого не было) -->
-    <!-- Убедитесь, что ваш CSS-файл называется style.css и лежит в той же папке -->
+    <title>AURA COSMIC | Бьюти-пространство</title>
+    <!-- Подключаем внешние стили -->
     <link rel="stylesheet" href="style.css">
-
-    <!-- 2. ИСПРАВЛЕННОЕ ПОДКЛЮЧЕНИЕ ШРИФТА (Исправлены адреса googleapis на fonts.googleapis) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <!-- Задний план с неоновыми сферами -->
-    <div class="glow-bg">
-        <div class="sphere pink"></div>
-        <div class="sphere lime"></div>
-    </div>
+    <div class="glow-bg"></div>
 
-    <!-- Шапка сайта -->
     <header class="navbar">
-        <div class="logo">AURA<span>.</span></div>
-        
-        <!-- Десктопное меню -->
+        <div class="logo" onclick="location.reload()">AURA<span>.</span></div>
         <nav class="menu">
             <a href="#services">Услуги</a>
             <a href="#gallery">Галерея</a>
-            <a href="#team">Мастера</a>
+            <a href="#maps" style="color:#ffcc00;">★ Мы на Картах</a>
         </nav>
-
-        <!-- Действия в шапке -->
         <div class="nav-actions">
+            <a href="https://yandex.ru" target="_blank" class="btn-maps">🗺️ На Карте</a>
             <button class="btn-primary" onclick="openBooking()">Запись</button>
-            <!-- Иконка бургер-меню для мобильных -->
-            <div class="burger-menu" onclick="toggleMobileMenu()">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
+            <div class="burger-menu" onclick="toggleMobileMenu()"><span></span><span></span><span></span></div>
         </div>
     </header>
 
-    <!-- Мобильное выезжающее меню -->
     <div class="mobile-nav" id="mobileNav">
         <a href="#services" onclick="toggleMobileMenu()">Услуги</a>
         <a href="#gallery" onclick="toggleMobileMenu()">Галерея</a>
-        <a href="#team" onclick="toggleMobileMenu()">Мастера</a>
-        <button class="btn-primary" onclick="openBooking();toggleMobileMenu()">Записаться</button>
+        <a href="https://yandex.ru" target="_blank" style="color:#ffcc00;" onclick="toggleMobileMenu()">🗺️ Мы на Картах</a>
+        <button class="btn-primary" style="width:80%;" onclick="openBooking();toggleMobileMenu()">Записаться</button>
     </div>
 
-    <!-- Главный экран (Hero) -->
     <main class="hero">
         <div class="hero-content">
-            <div class="badge">🔥 NEW ERA OF BEAUTY</div>
-            <h1>Твой стиль.<br><span class="gradient-text">Твоя автономия.</span></h1>
-            <p>Умное бьюти-пространство для тех, кто ценит время и безупречный результат. Пересечение комфорта и высокой эстетики.</p>
-            
+            <div class="badge">🔥 Новая эстетика твоего города</div>
+            <h1>Премиум бьюти.<br><span class="gradient-text">В один клик.</span></h1>
+            <p>Технологичное пространство красоты. Нажмите «ИИ подбор», чтобы робот мгновенно составил индивидуальный комплекс услуг и рассчитал персональную скидку.</p>
             <div class="hero-actions">
-                <button class="btn-primary-lg" onclick="openBooking()">Слот</button>
-                <button class="btn-secondary" onclick="toggleAiChat()">ИИ подбор</button>
+                <button class="btn-primary-lg" onclick="openBooking()">Выбрать время</button>
+                <button class="btn-secondary" onclick="toggleAiChat()">🤖 ИИ подбор</button>
             </div>
         </div>
-
-        <!-- Визуальный блок с карточкой (Glassmorphism) -->
         <div class="hero-visual">
             <div class="glass-card">
-                <div class="card-status">● Открыто</div>
+                <div class="card-status">Работаем • Рейтинг 5.0</div>
                 <div class="card-image-placeholder">
-                    <span class="placeholder-text">[ Фото вашего интерьера ]</span>
+                    <span class="placeholder-text">✨ Премиальный дизайн интерьера<br>и высочайший уровень сервиса.<br>Топ-мастера из Яндекс Карт.</span>
                 </div>
                 <div class="card-info">
-                    <h3>Атмосфера погружения</h3>
-                    <p>Правильный плейлист, идеальный матча-латте и топ-мастера.</p>
+                    <h3>Студия AURA COSMIC</h3>
+                    <p>Матча-латте, правильная музыка и безупречное качество окрашивания, стрижек и ногтевого сервиса.</p>
                 </div>
             </div>
         </div>
     </main>
 
-    <!-- Виджет ИИ-Ассистента -->
     <div id="ai-widget" class="ai-chat-window hidden">
         <div class="chat-header">
             <div class="ai-avatar">🤖</div>
-            <div class="ai-meta">
-                <h4>AURA AI</h4>
-                <p>Ассистент стиля</p>
-            </div>
+            <div class="ai-meta"><h4>AURA AI</h4><p>Онлайн-стилист</p></div>
             <button class="close-chat" onclick="toggleAiChat()">×</button>
         </div>
-        
         <div class="chat-body" id="chat-body">
-            <div class="message ai" id="ai-question">
-                Привет! Я помогу подобрать идеальную услугу. Готовы начать тест из 5 вопросов?
-            </div>
+            <div class="message ai">Привет! Я помогу подобрать идеальную услугу в нашей студии за 5 быстрых вопросов. Готовы начать?</div>
         </div>
-
         <div class="chat-footer" id="chat-footer">
-            <button class="btn-chat-action" id="chat-next-btn" onclick="nextAiStep()">Начать ✨</button>
+            <button class="btn-chat-action" style="text-align:center;font-weight:600;background:rgba(204,255,0,0.15);border-color:var(--lime);" onclick="nextAiStep()">Начать тест ✨</button>
         </div>
     </div>
 
-    <!-- Плавающая кнопка вызова ИИ в углу -->
-    <div class="ai-trigger" onclick="toggleAiChat()">
-        <div class="pulse-ring"></div>
-        <span class="ai-icon">🤖</span>
-        <span class="ai-tooltip">ИИ-Подбор</span>
-    </div>
+    <div class="ai-trigger" onclick="toggleAiChat()"><div class="pulse-ring"></div><span class="ai-icon">🤖</span></div>
 
+    <footer class="b2b-footer">
+        Хотите такой же конвертящий сайт для своего бизнеса на Картах? <a href="https://t.me" target="_blank">Связаться с разработчиком</a>
+    </footer>
+
+    <script>
+        let currentStep=0;const userAnswers={};const quizData=[{q:"Какая зона вас интересует?",o:[{t:"💇‍♀️ Волосы",v:"волосы"},{t:"💅 Ногти",v:"ногти"},{t:"✨ Лицо",v:"лицо"}]},{q:"Какая главная цель визита?",o:[{t:"⚡ Смена стиля",v:"стиль"},{t:"🌿 Уход и расслабление",v:"уход"},{t:"⏱️ Экспресс",v:"экспресс"}]},{q:"Как часто посещаете салоны?",o:[{t:"📅 Каждые 2-3 недели",v:"часто"},{t:"⏳ Раз в 1-2 месяца",v:"редко"}]},{q:"Категория мастера?",o:[{t:"🌟 Топ-мастер",v:"топ"},{t:"💎 Классический специалист",v:"стандарт"}]},{q:"Какой бонус активировать?",o:[{t:"☕ Авторский матча-латте",v:"матча"},{t:"💸 Скидка 10%",v:"скидка"}]}];
+        function toggleMobileMenu(){document.getElementById('mobileNav').classList.toggle('active');document.querySelector('.burger-menu').classList.toggle('open');}
+        function openBooking(){alert('⚙️ Демо-режим: здесь будет открываться форма онлайн-записи (YCLIENTS / DIKIDI).');}
+        function toggleAiChat(){document.getElementById('ai-widget').classList.toggle('hidden');}
+        function nextAiStep(){currentStep=0;const b=document.getElementById('chat-body');b.innerHTML=`<div class="message ai">Отлично! Поехали.</div>`;renderQuestion();}
+        function renderQuestion(){const b=document.getElementById('chat-body'),f=document.getElementById('chat-footer');if(currentStep<quizData.length){const d=quizData[currentStep];const m=document.createElement('div');m.className='message ai';m.innerText=`Вопрос ${currentStep+1}/${quizData.length}: ${d.q}`;b.appendChild(m);f.innerHTML='';d.o.forEach(opt=>{const btn=document.createElement('button');btn.className='btn-chat-action';btn.innerText=opt.t;btn.onclick=()=>handleUserAnswer(opt.t,opt.v);f.appendChild(btn);});b.scrollTop=b.scrollHeight;}else{showResult();}}
+        function handleUserAnswer(t,v){const b=document.getElementById('chat-body');userAnswers[`step_${currentStep}`]=v;const u=document.createElement('div');u.className='message user';u.innerText=t;b.appendChild(u);currentStep++;setTimeout(renderQuestion,350);}
+        function showResult(){const b=document.getElementById('chat-body'),f=document.getElementById('chat-footer');let r=userAnswers.step_0==="волосы"?"комплекс 'Умная стрижка + SPA'.":userAnswers.step_0==="ногти"?"сет 'Маникюр + Педикюр в 4 руки'.":"архитектура бровей и уход за лицом.";if(userAnswers.step_3==="топ")r+=" Работу выполнит Топ-мастер.";const m=document.createElement('div');m.className='message ai';m.style.borderColor='var(--lime)';m.innerHTML=`🎉 <b>Подбор завершен!</b><br><br>Вам подходит: ${r}<br><br>Бонус зафиксирован! Нажмите кнопку ниже для записи.`;b.appendChild(m);f.innerHTML=`<button class="btn-primary" style="width:100%;text-align:center;padding:12px;" onclick="openBooking()">Записаться на комплекс</button><button class="btn-chat-action" style="text-align:center;margin-top:4px;opacity:0.6;" onclick="nextAiStep()">Пройти заново 🔄</button>`;b.scrollTop=b.scrollHeight;}
+    </script>
 </body>
 </html>
