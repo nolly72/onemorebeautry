@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AURA COSMIC | Салон красоты</title>
+    <!-- Подключение шрифта -->
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Задний план с неоновыми сферами -->
+    <div class="glow-bg">
+        <div class="sphere pink"></div>
+        <div class="sphere lime"></div>
+    </div>
+
+    <!-- Шапка сайта -->
+    <header class="navbar">
+        <div class="logo">AURA<span>.</span></div>
+        
+        <!-- Десктопное меню -->
+        <nav class="menu">
+            <a href="#services">Услуги</a>
+            <a href="#gallery">Галерея</a>
+            <a href="#team">Мастера</a>
+        </nav>
+
+        <!-- Действия в шапке -->
+        <div class="nav-actions">
+            <button class="btn-primary" onclick="openBooking()">Запись</button>
+            <!-- Иконка бургер-меню для мобильных -->
+            <div class="burger-menu" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Мобильное выезжающее меню -->
+    <div class="mobile-nav" id="mobileNav">
+        <a href="#services" onclick="toggleMobileMenu()">Услуги</a>
+        <a href="#gallery" onclick="toggleMobileMenu()">Галерея</a>
+        <a href="#team" onclick="toggleMobileMenu()">Мастера</a>
+        <button class="btn-primary" onclick="openBooking();toggleMobileMenu()">Записаться</button>
+    </div>
+
+    <!-- Главный экран (Hero) -->
+    <main class="hero">
+        <div class="hero-content">
+            <div class="badge">🔥 NEW ERA OF BEAUTY</div>
+            <h1>Твой стиль.<br><span class="gradient-text">Твоя автономия.</span></h1>
+            <p>Умное бьюти-пространство для тех, кто ценит время и безупречный результат. Пересечение комфорта и высокой эстетики.</p>
+            
+            <div class="hero-actions">
+                <button class="btn-primary-lg" onclick="openBooking()">Слот</button>
+                <button class="btn-secondary" onclick="toggleAiChat()">ИИ подбор</button>
+            </div>
+        </div>
+
+        <!-- Визуальный блок с карточкой (Glassmorphism) -->
+        <div class="hero-visual">
+            <div class="glass-card">
+                <div class="card-status">● Открыто</div>
+                <div class="card-image-placeholder">
+                    <span class="placeholder-text">[ Фото вашего интерьера ]</span>
+                </div>
+                <div class="card-info">
+                    <h3>Атмосфера погружения</h3>
+                    <p>Правильный плейлист, идеальный матча-латте и топ-мастера.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Виджет ИИ-Ассистента -->
+    <div id="ai-widget" class="ai-chat-window hidden">
+        <div class="chat-header">
+            <div class="ai-avatar">🤖</div>
+            <div class="ai-meta">
+                <h4>AURA AI</h4>
+                <p>Ассистент стиля</p>
+            </div>
+            <button class="close-chat" onclick="toggleAiChat()">×</button>
+        </div>
+        
+        <div class="chat-body" id="chat-body">
+            <div class="message ai" id="ai-question">
+                Привет! Я помогу подобрать идеальную услугу. Готовы начать тест из 5 вопросов?
+            </div>
+        </div>
+
+        <div class="chat-footer" id="chat-footer">
+            <button class="btn-chat-action" id="chat-next-btn" onclick="nextAiStep()">Начать ✨</button>
+        </div>
+    </div>
+
+    <!-- Плавающая кнопка вызова ИИ в углу -->
+    <div class="ai-trigger" onclick="toggleAiChat()">
+        <div class="pulse-ring"></div>
+        <span class="ai-icon">🤖</span>
+        <span class="ai-tooltip">ИИ-Подбор</span>
+    </div>
+
+</body>
+</html>
