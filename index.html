@@ -3,88 +3,195 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AURA COSMIC | Бьюти-пространство</title>
-    <!-- Подключаем внешние стили -->
-    <link rel="stylesheet" href="style.css">
+    <title>ONE MORE BEAUTY | Элитное бьюти-пространство</title>
+    <!-- Премиальный шрифт -->
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <div class="glow-bg"></div>
+    <!-- Живой неоновый бэкграунд -->
+    <div class="glow-bg">
+        <div class="sphere pink"></div>
+        <div class="sphere lime"></div>
+    </div>
 
+    <!-- Фиксированная верхняя панель (Sticky Navbar) -->
     <header class="navbar">
-        <div class="logo" onclick="location.reload()">AURA<span>.</span></div>
+        <div class="logo">ONE MORE<span>.</span></div>
+        
         <nav class="menu">
-            <a href="#services">Услуги</a>
-            <a href="#gallery">Галерея</a>
-            <a href="#maps" style="color:#ffcc00;">★ Мы на Картах</a>
+            <a href="#about">О нас</a>
+            <a href="#portfolio">Наши работы</a>
+            <a href="#interior">Интерьер</a>
         </nav>
+
         <div class="nav-actions">
-            <a href="https://yandex.ru" target="_blank" class="btn-maps">🗺️ На Карте</a>
-            <button class="btn-primary" onclick="openBooking()">Запись</button>
-            <div class="burger-menu" onclick="toggleMobileMenu()"><span></span><span></span><span></span></div>
+            <button class="btn-primary" onclick="openLeadModal()">Запись</button>
+            <div class="burger-menu" onclick="toggleMobileMenu()">
+                <span></span><span></span><span></span>
+            </div>
         </div>
     </header>
 
+    <!-- Адаптивное меню для смартфонов -->
     <div class="mobile-nav" id="mobileNav">
-        <a href="#services" onclick="toggleMobileMenu()">Услуги</a>
-        <a href="#gallery" onclick="toggleMobileMenu()">Галерея</a>
-        <a href="https://yandex.ru" target="_blank" style="color:#ffcc00;" onclick="toggleMobileMenu()">🗺️ Мы на Картах</a>
-        <button class="btn-primary" style="width:80%;" onclick="openBooking();toggleMobileMenu()">Записаться</button>
+        <a href="#about" onclick="toggleMobileMenu()">О нас</a>
+        <a href="#portfolio" onclick="toggleMobileMenu()">Наши работы</a>
+        <a href="#interior" onclick="toggleMobileMenu()">Интерьер</a>
+        <button class="btn-primary" onclick="openLeadModal(); toggleMobileMenu()">Записаться онлайн</button>
     </div>
 
-    <main class="hero">
+    <!-- Главный экран (Hero Section) -->
+    <main class="hero" id="about">
         <div class="hero-content">
-            <div class="badge">🔥 Новая эстетика твоего города</div>
-            <h1>Премиум бьюти.<br><span class="gradient-text">В один клик.</span></h1>
-            <p>Технологичное пространство красоты. Нажмите «ИИ подбор», чтобы робот мгновенно составил индивидуальный комплекс услуг и рассчитал персональную скидку.</p>
+            <div class="badge">🔥 EXPERT BEAUTY SPACE</div>
+            <h1>Твой стиль.<br><span class="gradient-text">Твоя автономия.</span></h1>
+            <p>Высокотехнологичное бьюти-пространство для тех, кто ценит безупречный сервис, приватность и премиальное качество. Создаем тренды, а не следуем им.</p>
+            
             <div class="hero-actions">
-                <button class="btn-primary-lg" onclick="openBooking()">Выбрать время</button>
-                <button class="btn-secondary" onclick="toggleAiChat()">🤖 ИИ подбор</button>
+                <button class="btn-primary-lg" onclick="openLeadModal()">Забронировать слот</button>
+                <button class="btn-secondary" onclick="toggleAiChat()">Подобрать образ с ИИ</button>
             </div>
         </div>
+
         <div class="hero-visual">
-            <div class="glass-card">
-                <div class="card-status">Работаем • Рейтинг 5.0</div>
-                <div class="card-image-placeholder">
-                    <span class="placeholder-text">✨ Премиальный дизайн интерьера<br>и высочайший уровень сервиса.<br>Топ-мастера из Яндекс Карт.</span>
-                </div>
-                <div class="card-info">
-                    <h3>Студия AURA COSMIC</h3>
-                    <p>Матча-латте, правильная музыка и безупречное качество окрашивания, стрижек и ногтевого сервиса.</p>
-                </div>
+            <div class="main-hero-image-container">
+                <!-- Главная большая фотография салона -->
+                <img src="images/hero-bg.jpg" alt="Интерьер премиум салона ONE MORE" class="hero-img">
+                <div class="image-overlay"></div>
             </div>
         </div>
     </main>
 
-    <div id="ai-widget" class="ai-chat-window hidden">
-        <div class="chat-header">
-            <div class="ai-avatar">🤖</div>
-            <div class="ai-meta"><h4>AURA AI</h4><p>Онлайн-стилист</p></div>
-            <button class="close-chat" onclick="toggleAiChat()">×</button>
+    <!-- Раздел: Наши работы (Портфолио) -->
+    <section class="section-container" id="portfolio">
+        <div class="section-header">
+            <span class="section-subtitle">LOOKBOOK</span>
+            <h2>Портфолио мастеров</h2>
+            <p>Реальные результаты окрашиваний, стрижек и эстетических процедур</p>
         </div>
-        <div class="chat-body" id="chat-body">
-            <div class="message ai">Привет! Я помогу подобрать идеальную услугу в нашей студии за 5 быстрых вопросов. Готовы начать?</div>
+        
+        <div class="portfolio-grid">
+            <div class="portfolio-item">
+                <div class="img-wrapper">
+                    <img src="images/work-1.jpg" alt="Сложное окрашивание Aura Blonde">
+                </div>
+                <div class="work-info"><h4>Aura Blonde</h4><p>Топ-колорист Кристина</p></div>
+            </div>
+            <div class="portfolio-item">
+                <div class="img-wrapper">
+                    <img src="images/work-2.jpg" alt="Премиум маникюр Chrome Nails">
+                </div>
+                <div class="work-info"><h4>Chrome Nails</h4><p>Мастер ногтевой эстетики Лиза</p></div>
+            </div>
+            <div class="portfolio-item">
+                <div class="img-wrapper">
+                    <img src="images/work-3.jpg" alt="Стрижка Smart Cut">
+                </div>
+                <div class="work-info"><h4>Smart Cut</h4><p>Арт-директор Алекс</p></div>
+            </div>
+            <div class="portfolio-item">
+                <div class="img-wrapper">
+                    <img src="images/work-4.jpg" alt="Наращивание ресниц Lami & Curl">
+                </div>
+                <div class="work-info"><h4>Lami & Curl</h4><p>Лешмейкер Мария</p></div>
+            </div>
         </div>
-        <div class="chat-footer" id="chat-footer">
-            <button class="btn-chat-action" style="text-align:center;font-weight:600;background:rgba(204,255,0,0.15);border-color:var(--lime);" onclick="nextAiStep()">Начать тест ✨</button>
+    </section>
+
+    <!-- Раздел: Вид салона (Интерьер) -->
+    <section class="section-container interior-section" id="interior">
+        <div class="section-header">
+            <span class="section-subtitle">ATMOSPHERE</span>
+            <h2>Эстетика пространства</h2>
+            <p>Каждая деталь продумана для вашего максимального комфорта и уединения</p>
+        </div>
+
+        <div class="interior-gallery">
+            <div class="interior-main-card">
+                <div class="img-wrapper main-interior-height">
+                    <img src="images/interior-1.jpg" alt="Главный зал стилистов">
+                </div>
+                <div class="interior-caption">
+                    <h3>Зал стилистов</h3>
+                    <p>Итальянские кресла, правильный бестеневой свет и молекулярный бар.</p>
+                </div>
+            </div>
+            <div class="interior-side-grid">
+                <div class="interior-side-item">
+                    <div class="img-wrapper side-interior-height">
+                        <img src="images/interior-2.jpg" alt="VIP-кабинет ухода">
+                    </div>
+                </div>
+                <div class="interior-side-item">
+                    <div class="img-wrapper side-interior-height">
+                        <img src="images/interior-3.jpg" alt="Зона нейл-сервиса">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Модальное окно: Форма заявки (Lead Form) -->
+    <div id="lead-modal" class="modal-overlay hidden">
+        <div class="modal-card">
+            <button class="close-modal" onclick="closeLeadModal()">×</button>
+            <h3>Забронировать визит</h3>
+            <p>Оставьте контакты, и персональный координатор стиля свяжется с вами в течение 5 минут.</p>
+            
+            <form id="booking-form" onsubmit="handleFormSubmit(event)">
+                <div class="input-group">
+                    <label>Ваше имя</label>
+                    <input type="text" placeholder="Константин" required>
+                </div>
+                <div class="input-group">
+                    <label>Номер телефона</label>
+                    <input type="tel" placeholder="+7 (999) 000-00-00" required>
+                </div>
+                <div class="input-group">
+                    <label>Желаемая услуга</label>
+                    <select>
+                        <option>Смена стиля (Волосы)</option>
+                        <option>Премиальный ногтевой сервис</option>
+                        <option>Комплексный уход за лицом</option>
+                        <option>Консультация топ-мастера</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-primary-lg form-submit-btn">Отправить заявку</button>
+            </form>
         </div>
     </div>
 
-    <div class="ai-trigger" onclick="toggleAiChat()"><div class="pulse-ring"></div><span class="ai-icon">🤖</span></div>
+    <!-- Виджет ИИ-Ассистента -->
+    <div id="ai-widget" class="ai-chat-window hidden">
+        <div class="chat-header">
+            <div class="ai-avatar">🤖</div>
+            <div class="ai-meta">
+                <h4>ONE MORE AI</h4>
+                <p>Ассистент стиля</p>
+            </div>
+            <button class="close-chat" onclick="toggleAiChat()">×</button>
+        </div>
+        
+        <div class="chat-body" id="chat-body">
+            <div class="message ai" id="ai-question">
+                Приветствую! Я виртуальный ассистент пространства One More. Помогу подобрать процедуру, мастера и персональный бонус. Начнем тест из 5 вопросов?
+            </div>
+        </div>
 
-    <footer class="b2b-footer">
-        Хотите такой же конвертящий сайт для своего бизнеса на Картах? <a href="https://t.me" target="_blank">Связаться с разработчиком</a>
-    </footer>
+        <div class="chat-footer" id="chat-footer">
+            <button class="btn-chat-action" id="chat-next-btn" onclick="nextAiStep()">Запустить подбор ✨</button>
+        </div>
+    </div>
 
-    <script>
-        let currentStep=0;const userAnswers={};const quizData=[{q:"Какая зона вас интересует?",o:[{t:"💇‍♀️ Волосы",v:"волосы"},{t:"💅 Ногти",v:"ногти"},{t:"✨ Лицо",v:"лицо"}]},{q:"Какая главная цель визита?",o:[{t:"⚡ Смена стиля",v:"стиль"},{t:"🌿 Уход и расслабление",v:"уход"},{t:"⏱️ Экспресс",v:"экспресс"}]},{q:"Как часто посещаете салоны?",o:[{t:"📅 Каждые 2-3 недели",v:"часто"},{t:"⏳ Раз в 1-2 месяца",v:"редко"}]},{q:"Категория мастера?",o:[{t:"🌟 Топ-мастер",v:"топ"},{t:"💎 Классический специалист",v:"стандарт"}]},{q:"Какой бонус активировать?",o:[{t:"☕ Авторский матча-латте",v:"матча"},{t:"💸 Скидка 10%",v:"скидка"}]}];
-        function toggleMobileMenu(){document.getElementById('mobileNav').classList.toggle('active');document.querySelector('.burger-menu').classList.toggle('open');}
-        function openBooking(){alert('⚙️ Демо-режим: здесь будет открываться форма онлайн-записи (YCLIENTS / DIKIDI).');}
-        function toggleAiChat(){document.getElementById('ai-widget').classList.toggle('hidden');}
-        function nextAiStep(){currentStep=0;const b=document.getElementById('chat-body');b.innerHTML=`<div class="message ai">Отлично! Поехали.</div>`;renderQuestion();}
-        function renderQuestion(){const b=document.getElementById('chat-body'),f=document.getElementById('chat-footer');if(currentStep<quizData.length){const d=quizData[currentStep];const m=document.createElement('div');m.className='message ai';m.innerText=`Вопрос ${currentStep+1}/${quizData.length}: ${d.q}`;b.appendChild(m);f.innerHTML='';d.o.forEach(opt=>{const btn=document.createElement('button');btn.className='btn-chat-action';btn.innerText=opt.t;btn.onclick=()=>handleUserAnswer(opt.t,opt.v);f.appendChild(btn);});b.scrollTop=b.scrollHeight;}else{showResult();}}
-        function handleUserAnswer(t,v){const b=document.getElementById('chat-body');userAnswers[`step_${currentStep}`]=v;const u=document.createElement('div');u.className='message user';u.innerText=t;b.appendChild(u);currentStep++;setTimeout(renderQuestion,350);}
-        function showResult(){const b=document.getElementById('chat-body'),f=document.getElementById('chat-footer');let r=userAnswers.step_0==="волосы"?"комплекс 'Умная стрижка + SPA'.":userAnswers.step_0==="ногти"?"сет 'Маникюр + Педикюр в 4 руки'.":"архитектура бровей и уход за лицом.";if(userAnswers.step_3==="топ")r+=" Работу выполнит Топ-мастер.";const m=document.createElement('div');m.className='message ai';m.style.borderColor='var(--lime)';m.innerHTML=`🎉 <b>Подбор завершен!</b><br><br>Вам подходит: ${r}<br><br>Бонус зафиксирован! Нажмите кнопку ниже для записи.`;b.appendChild(m);f.innerHTML=`<button class="btn-primary" style="width:100%;text-align:center;padding:12px;" onclick="openBooking()">Записаться на комплекс</button><button class="btn-chat-action" style="text-align:center;margin-top:4px;opacity:0.6;" onclick="nextAiStep()">Пройти заново 🔄</button>`;b.scrollTop=b.scrollHeight;}
-    </script>
+    <!-- Фиксированная кнопка вызова ИИ -->
+    <div class="ai-trigger" onclick="toggleAiChat()">
+        <div class="pulse-ring"></div>
+        <span class="ai-icon">🤖</span>
+        <span class="ai-tooltip">ИИ-Подбор</span>
+    </div>
+
 </body>
 </html>

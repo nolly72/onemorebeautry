@@ -1,8 +1,157 @@
-let currentStep=0;const userAnswers={};const quizData=[{q:"Какая зона вас интересует?",o:[{t:"💇‍♀️ Волосы",v:"волосы"},{t:"💅 Ногти",v:"ногти"},{t:"✨ Лицо",v:"лицо"}]},{q:"Какая главная цель визита?",o:[{t:"⚡ Смена стиля",v:"стиль"},{t:"🌿 Уход и расслабление",v:"уход"},{t:"⏱️ Экспресс",v:"экспресс"}]},{q:"Как часто посещаете салоны?",o:[{t:"📅 Каждые 2-3 недели",v:"часто"},{t:"⏳ Раз в 1-2 месяца",v:"редко"}]},{q:"Категория мастера?",o:[{t:"🌟 Топ-мастер",v:"топ"},{t:"💎 Классический специалист",v:"стандарт"}]},{q:"Какой бонус активировать?",o:[{t:"☕ Авторский матча-латте",v:"матча"},{t:"💸 Скидка 10%",v:"скидка"}]}];
-function toggleMobileMenu(){document.getElementById('mobileNav').classList.toggle('active');document.querySelector('.burger-menu').classList.toggle('open')}
-function openBooking(){alert('⚙️ Демо-режим: здесь будет открываться форма онлайн-записи (YCLIENTS / DIKIDI).')}
-function toggleAiChat(){document.getElementById('ai-widget').classList.toggle('hidden')}
-function nextAiStep(){currentStep=0;const b=document.getElementById('chat-body');b.innerHTML=`<div class="message ai">Отлично! Поехали.</div>`;renderQuestion()}
-function renderQuestion(){const b=document.getElementById('chat-body'),f=document.getElementById('chat-footer');if(currentStep<quizData.length){const d=quizData[currentStep],m=document.createElement('div');m.className='message ai';m.innerText=`Вопрос ${currentStep+1}/${quizData.length}: ${d.q}`;b.appendChild(m);f.innerHTML='';d.o.forEach(opt=>{const btn=document.createElement('button');btn.className='btn-chat-action';btn.innerText=opt.t;btn.onclick=()=>handleUserAnswer(opt.t,opt.v);f.appendChild(btn)});b.scrollTop=b.scrollHeight}else{showResult()}}
-function handleUserAnswer(t,v){const b=document.getElementById('chat-body');userAnswers[`step_${currentStep}`]=v;const u=document.createElement('div');u.className='message user';u.innerText=t;b.appendChild(u);currentStep++;setTimeout(renderQuestion,350)}
-function showResult(){const b=document.getElementById('chat-body'),f=document.getElementById('chat-footer');let r=userAnswers.step_0==="волосы"?"комплекс 'Умная стрижка + SPA'.":userAnswers.step_0==="ногти"?"сет 'Маникюр + Педикюр в 4 руки'.":"архитектура бровей и уход за лицом.";if(userAnswers.step_3==="топ")r+=" Работу выполнит Топ-мастер.";const m=document.createElement('div');m.className='message ai';m.style.borderColor='var(--lime)';m.innerHTML=`🎉 <b>Подбор завершен!</b><br><br>Вам подходит: ${r}<br><br>Бонус зафиксирован! Нажмите кнопку ниже для записи.`;b.appendChild(m);f.innerHTML=`<button class="btn-primary" style="width:100%;text-align:center;padding:12px;" onclick="openBooking()">Записаться на комплекс</button><button class="btn-chat-action" style="text-align:center;margin-top:4px;opacity:0.6;" onclick="nextAiStep()">Пройти заново 🔄</button>`;b.scrollTop=b.scrollHeight}
+// --- 1. МОБИЛЬНОЕ МЕНЮ И МОДАЛЬНОЕ ОКНО ---
+function toggleMobileMenu() {
+    const nav = document.getElementById('mobileNav');
+    const burger = document.querySelector('.burger-menu');
+    nav.classList.toggle('active');
+    burger.classList.toggle('open');
+}
+
+function openLeadModal() {
+    document.getElementById('lead-modal').classList.remove('hidden');
+}
+
+function closeLeadModal() {
+    document.getElementById('lead-modal').classList.add('hidden');
+}
+
+function handleFormSubmit(e) {
+    e.preventDefault();
+    alert('Спасибо! Заявка успешно отправлена. Координатор свяжется с вами в течение 5 минут.');
+    closeLeadModal();
+    e.target.reset();
+}
+
+// Закрытие модального окна при клике на темную область вокруг формы
+document.getElementById('lead-modal').addEventListener('click', function(e) {
+    if (e.target === this) closeLeadModal();
+});
+
+
+// --- 2. ИИ-АССИСТЕНТ (СКРИПТ НА 5 ВОПРОСОВ) ---
+let currentStep = 0;
+const userAnswers = {};
+
+const quizData = [
+    {
+        question: "Какое бьюти-направление вас интересует?",
+        options: [
+            { text: "💇‍♀️ Стилистика волос (стрижки, окрашивания)", value: "волосы" },
+            { text: "💅 Ногтевой сервис (маникюр, педикюр)", value: "ногти" },
+            { text: "✨ Эстетика лица (брови, ресницы, уход)", value: "лицо" }
+        ]
+    },
+    {
+        question: "Какая основная задача перед нами стоит?",
+        options: [
+            { text: "🔥 Полная смена имиджа и новый стиль", value: "смена" },
+            { text: "🌿 Восстановление, уход и тотальный релакс", value: "уход" },
+            { text: "⏱️ Экспресс-образ перед важным мероприятием", value: "экспресс" }
+        ]
+    },
+    {
+        question: "В какое время вам обычно комфортнее посещать салон?",
+        options: [
+            { text: "☀️ Утренние часы (с 10:00 до 14:00)", value: "утро" },
+            { text: "☕ Дневное время (с 14:00 до 18:00)", value: "день" },
+            { text: "🌌 Вечерние слоты (с 18:00 до 22:00)", value: "вечер" }
+        ]
+    },
+    {
+        question: "Категория мастера, которой вы отдаете предпочтение?",
+        options: [
+            { text: "🌟 Топ-мастер (авторские техники и премиум-опыт)", value: "топ" },
+            { text: "💎 Классический мастер студии (высокое качество)", value: "профи" }
+        ]
+    },
+    {
+        question: "Какой персональный комплимент активировать к вашему визиту?",
+        options: [
+            { text: "🥂 Бокал премиального игристого или свежий матча-латте", value: "напиток" },
+            { text: "💸 Приветственный комплимент -10% на первую услугу", value: "скидка" },
+            { text: "🧴 Экспресс-уход для рук/волос во время процедуры", value: "гифт" }
+        ]
+    }
+];
+
+function toggleAiChat() {
+    document.getElementById('ai-widget').classList.toggle('hidden');
+}
+
+function nextAiStep() {
+    currentStep = 0;
+    const body = document.getElementById('chat-body');
+    body.innerHTML = `<div class="message ai">Анализируем ваши предпочтения...</div>`;
+    renderQuestion();
+}
+
+function renderQuestion() {
+    const body = document.getElementById('chat-body');
+    const footer = document.getElementById('chat-footer');
+    
+    if (currentStep < quizData.length) {
+        const step = quizData[currentStep];
+        
+        const qDiv = document.createElement('div');
+        qDiv.className = 'message ai';
+        qDiv.innerText = `Этап ${currentStep + 1}/${quizData.length}: ${step.question}`;
+        body.appendChild(qDiv);
+        
+        footer.innerHTML = '';
+        step.options.forEach(opt => {
+            const btn = document.createElement('button');
+            btn.className = 'btn-chat-action';
+            btn.innerText = opt.text;
+            btn.onclick = () => saveAnswer(opt.text, opt.value);
+            footer.appendChild(btn);
+        });
+        
+        body.scrollTop = body.scrollHeight;
+    } else {
+        showResult();
+    }
+}
+
+function saveAnswer(text, val) {
+    const body = document.getElementById('chat-body');
+    userAnswers[`step_${currentStep}`] = val;
+    
+    const uDiv = document.createElement('div');
+    uDiv.className = 'message user';
+    uDiv.innerText = text;
+    body.appendChild(uDiv);
+    
+    currentStep++;
+    setTimeout(renderQuestion, 400);
+}
+
+function showResult() {
+    const body = document.getElementById('chat-body');
+    const footer = document.getElementById('chat-footer');
+    let res = "";
+    
+    // Ветвление рекомендаций на основе ответов
+    if (userAnswers.step_0 === "волосы") {
+        res = "Исходя из ваших ответов, мы рекомендуем забронировать сложную технику окрашивания или премиум-стрижку 'Smart Cut' с восстанавливающим уходом.";
+    } else if (userAnswers.step_0 === "ногти") {
+        res = "Вам идеально подойдет наш фирменный комплекс в 4 руки (премиальный маникюр и педикюр) для максимальной экономии вашего времени.";
+    } else {
+        res = "Наилучший выбор для вас — комплекс моделирования взгляда (брови + ламинирование ресниц) в сочетании с экспресс-уходом за кожей лица.";
+    }
+    
+    if (userAnswers.step_3 === "топ") {
+        res += " Для реализации вашей задачи мы закрепим за вами Арт-директора или Топ-мастера студии.";
+    }
+    
+    const rDiv = document.createElement('div');
+    rDiv.className = 'message ai';
+    rDiv.style.borderColor = 'var(--lime)';
+    rDiv.innerHTML = `🎯 <b>Идеальное решение подобрано!</b><br><br>${res}<br><br>Ваш выбранный комплимент успешно зафиксирован за номером. Нажмите кнопку ниже для бронирования.`;
+    body.appendChild(rDiv);
+    
+    footer.innerHTML = `
+        <button class="btn-primary" style="width:100%; text-align:center; padding:12px;" onclick="toggleAiChat(); openLeadModal();">Забронировать этот вариант</button>
+        <button class="btn-chat-action" style="text-align:center; margin-top:4px;" onclick="nextAiStep()">Пройти тест заново 🔄</button>
+    `;
+    
+    body.scrollTop = body.scrollHeight;
+}
