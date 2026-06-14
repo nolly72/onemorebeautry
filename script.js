@@ -1,9 +1,6 @@
-// --- 1. МОБИЛЬНОЕ МЕНЮ И МОДАЛЬНОЕ ОКНО ---
 function toggleMobileMenu() {
     const nav = document.getElementById('mobileNav');
-    const burger = document.querySelector('.burger-menu');
     nav.classList.toggle('active');
-    burger.classList.toggle('open');
 }
 
 function openLeadModal() {
@@ -16,59 +13,56 @@ function closeLeadModal() {
 
 function handleFormSubmit(e) {
     e.preventDefault();
-    alert('Спасибо! Заявка успешно отправлена. Координатор свяжется с вами в течение 5 минут.');
+    alert('Заявка успешно отправлена! Мы свяжемся с вами в течение 5 минут.');
     closeLeadModal();
     e.target.reset();
 }
 
-// Закрытие модального окна при клике на темную область вокруг формы
 document.getElementById('lead-modal').addEventListener('click', function(e) {
     if (e.target === this) closeLeadModal();
 });
 
-
-// --- 2. ИИ-АССИСТЕНТ (СКРИПТ НА 5 ВОПРОСОВ) ---
 let currentStep = 0;
 const userAnswers = {};
 
 const quizData = [
     {
-        question: "Какое бьюти-направление вас интересует?",
+        question: "Какое направление вас интересует?",
         options: [
-            { text: "💇‍♀️ Стилистика волос (стрижки, окрашивания)", value: "волосы" },
-            { text: "💅 Ногтевой сервис (маникюр, педикюр)", value: "ногти" },
-            { text: "✨ Эстетика лица (брови, ресницы, уход)", value: "лицо" }
+            { text: "💇‍♀️ Волосы (стрижка, окрашивание)", value: "волосы" },
+            { text: "💅 Ногти (маникюр, педикюр)", value: "ногти" },
+            { text: "✨ Лицо (брови, ресницы, уход)", value: "лицо" }
         ]
     },
     {
-        question: "Какая основная задача перед нами стоит?",
+        question: "Какая основная задача стоит перед нами?",
         options: [
-            { text: "🔥 Полная смена имиджа и новый стиль", value: "смена" },
-            { text: "🌿 Восстановление, уход и тотальный релакс", value: "уход" },
-            { text: "⏱️ Экспресс-образ перед важным мероприятием", value: "экспресс" }
+            { text: "🔥 Полная смена имиджа", value: "смена" },
+            { text: "🌿 Восстановление и релакс", value: "уход" },
+            { text: "⏱️ Экспресс-образ к событию", value: "экспресс" }
         ]
     },
     {
-        question: "В какое время вам обычно комфортнее посещать салон?",
+        question: "В какое время вам удобнее прийти?",
         options: [
-            { text: "☀️ Утренние часы (с 10:00 до 14:00)", value: "утро" },
-            { text: "☕ Дневное время (с 14:00 до 18:00)", value: "день" },
-            { text: "🌌 Вечерние слоты (с 18:00 до 22:00)", value: "вечер" }
+            { text: "☀️ Утро (с 10:00 до 14:00)", value: "утро" },
+            { text: "☕ День (с 14:00 до 18:00)", value: "день" },
+            { text: "🌌 Вечер (с 18:00 до 22:00)", value: "вечер" }
         ]
     },
     {
-        question: "Категория мастера, которой вы отдаете предпочтение?",
+        question: "Какую категорию мастера выберем?",
         options: [
-            { text: "🌟 Топ-мастер (авторские техники и премиум-опыт)", value: "топ" },
-            { text: "💎 Классический мастер студии (высокое качество)", value: "профи" }
+            { text: "🌟 Топ-мастер (премиум подход)", value: "топ" },
+            { text: "💎 Классический мастер студии", value: "профи" }
         ]
     },
     {
-        question: "Какой персональный комплимент активировать к вашему визиту?",
+        question: "Какой подарок закрепить за вашим визитом?",
         options: [
-            { text: "🥂 Бокал премиального игристого или свежий матча-латте", value: "напиток" },
-            { text: "💸 Приветственный комплимент -10% на первую услугу", value: "скидка" },
-            { text: "🧴 Экспресс-уход для рук/волос во время процедуры", value: "гифт" }
+            { text: "🥂 Премиальный напиток (матча / игристое)", value: "напиток" },
+            { text: "💸 Приветственный комплимент -10%", value: "скидка" },
+            { text: "🧴 Экспресс-уход во время процедуры", value: "уход_рук" }
         ]
     }
 ];
@@ -80,7 +74,7 @@ function toggleAiChat() {
 function nextAiStep() {
     currentStep = 0;
     const body = document.getElementById('chat-body');
-    body.innerHTML = `<div class="message ai">Анализируем ваши предпочтения...</div>`;
+    body.innerHTML = `<div class="message ai">Анализирую ваши предпочтения...</div>`;
     renderQuestion();
 }
 
@@ -90,10 +84,9 @@ function renderQuestion() {
     
     if (currentStep < quizData.length) {
         const step = quizData[currentStep];
-        
         const qDiv = document.createElement('div');
         qDiv.className = 'message ai';
-        qDiv.innerText = `Этап ${currentStep + 1}/${quizData.length}: ${step.question}`;
+        qDiv.innerText = `Вопрос ${currentStep + 1}/${quizData.length}: ${step.question}`;
         body.appendChild(qDiv);
         
         footer.innerHTML = '';
@@ -104,7 +97,6 @@ function renderQuestion() {
             btn.onclick = () => saveAnswer(opt.text, opt.value);
             footer.appendChild(btn);
         });
-        
         body.scrollTop = body.scrollHeight;
     } else {
         showResult();
@@ -129,29 +121,27 @@ function showResult() {
     const footer = document.getElementById('chat-footer');
     let res = "";
     
-    // Ветвление рекомендаций на основе ответов
     if (userAnswers.step_0 === "волосы") {
-        res = "Исходя из ваших ответов, мы рекомендуем забронировать сложную технику окрашивания или премиум-стрижку 'Smart Cut' с восстанавливающим уходом.";
+        res = "Рекомендуем записаться на комплексное окрашивание или стрижку 'Smart Cut' с восстанавливающим уходом.";
     } else if (userAnswers.step_0 === "ногти") {
-        res = "Вам идеально подойдет наш фирменный комплекс в 4 руки (премиальный маникюр и педикюр) для максимальной экономии вашего времени.";
+        res = "Вам отлично подойдет комплекс премиум маникюра и педикюра в 4 руки для идеальной экономии времени.";
     } else {
-        res = "Наилучший выбор для вас — комплекс моделирования взгляда (брови + ламинирование ресниц) в сочетании с экспресс-уходом за кожей лица.";
+        res = "Наилучший выбор — моделирование взгляда (брови + ресницы) и легкий уход за кожей лица.";
     }
     
     if (userAnswers.step_3 === "топ") {
-        res += " Для реализации вашей задачи мы закрепим за вами Арт-директора или Топ-мастера студии.";
+        res += " Для реализации вашей задачи мы закрепим за вами Топ-мастера студии.";
     }
     
     const rDiv = document.createElement('div');
     rDiv.className = 'message ai';
     rDiv.style.borderColor = 'var(--lime)';
-    rDiv.innerHTML = `🎯 <b>Идеальное решение подобрано!</b><br><br>${res}<br><br>Ваш выбранный комплимент успешно зафиксирован за номером. Нажмите кнопку ниже для бронирования.`;
+    rDiv.innerHTML = `🎯 <b>Решение подобрано!</b><br><br>${res}<br><br>Подарок успешно забронирован. Нажмите кнопку ниже для записи.`;
     body.appendChild(rDiv);
     
     footer.innerHTML = `
-        <button class="btn-primary" style="width:100%; text-align:center; padding:12px;" onclick="toggleAiChat(); openLeadModal();">Забронировать этот вариант</button>
-        <button class="btn-chat-action" style="text-align:center; margin-top:4px;" onclick="nextAiStep()">Пройти тест заново 🔄</button>
+        <button class="btn-primary" style="width:100%; text-align:center; padding:12px;" onclick="toggleAiChat(); openLeadModal();">Записаться на сеанс</button>
+        <button class="btn-chat-action" style="text-align:center; margin-top:4px;" onclick="nextAiStep()">Пройти заново 🔄</button>
     `;
-    
     body.scrollTop = body.scrollHeight;
 }
