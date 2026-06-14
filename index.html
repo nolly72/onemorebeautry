@@ -4,19 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ONE MORE BEAUTY | Премиум Салон</title>
+    <!-- Премиальные шрифты -->
     <link rel="preconnect" href="https://googleapis.com">
     <link rel="preconnect" href="https://gstatic.com" crossorigin>
     <link href="https://googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <!-- Ссылка на внешний файл стилей -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Живой фон -->
+    <!-- Градиентный фон с неоновыми элементами -->
     <div class="glow-bg">
         <div class="sphere pink"></div>
         <div class="sphere lime"></div>
     </div>
 
-    <!-- Шапка -->
+    <!-- Фиксированная навигационная панель -->
     <header class="navbar">
         <div class="logo">ONE MORE<span>.</span></div>
         <nav class="menu">
@@ -31,14 +34,14 @@
         </div>
     </header>
 
-    <!-- Мобильное меню -->
+    <!-- Выдвижная панель меню для мобильных -->
     <div class="mobile-nav" id="mobileNav">
         <a href="#portfolio" onclick="toggleMobileMenu()">Работы</a>
         <a href="#interior" onclick="toggleMobileMenu()">Салон</a>
         <button class="btn-primary" onclick="openLeadModal(); toggleMobileMenu()">Записаться</button>
     </div>
 
-    <!-- Главный экран -->
+    <!-- Главный экран презентации студии -->
     <main class="hero">
         <div class="hero-content">
             <div class="badge">🔥 EXPERT BEAUTY SPACE</div>
@@ -57,7 +60,7 @@
         </div>
     </main>
 
-    <!-- Портфолио -->
+    <!-- Сетка портфолио работ (Лукбук) -->
     <section class="section-container" id="portfolio">
         <div class="section-header">
             <span class="section-subtitle">LOOKBOOK</span>
@@ -84,7 +87,7 @@
         </div>
     </section>
 
-    <!-- Интерьер -->
+    <!-- Галерея интерьера (Атмосфера) -->
     <section class="section-container" id="interior">
         <div class="section-header">
             <span class="section-subtitle">ATMOSPHERE</span>
@@ -106,7 +109,7 @@
         </div>
     </section>
 
-    <!-- Модальное окно -->
+    <!-- Всплывающее окно формы заявки -->
     <div id="lead-modal" class="modal-overlay hidden">
         <div class="modal-card">
             <button class="close-modal" onclick="closeLeadModal()">×</button>
@@ -134,7 +137,7 @@
         </div>
     </div>
 
-    <!-- ИИ-Ассистент -->
+    <!-- Всплывающий чат ИИ-Ассистента -->
     <div id="ai-widget" class="ai-chat-window hidden">
         <div class="chat-header">
             <div class="ai-avatar">🤖</div>
@@ -152,11 +155,13 @@
         </div>
     </div>
 
-    <!-- Кнопка ИИ -->
+    <!-- Интерактивный триггер вызова ИИ -->
     <div class="ai-trigger" onclick="toggleAiChat()">
         <div class="pulse-ring"></div>
         <span class="ai-icon">🤖</span>
     </div>
 
+    <!-- Ссылка на внешний файл логики -->
+    <script src="script.js"></script>
 </body>
 </html>

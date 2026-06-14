@@ -1,6 +1,5 @@
 function toggleMobileMenu() {
-    const nav = document.getElementById('mobileNav');
-    nav.classList.toggle('active');
+    document.getElementById('mobileNav').classList.toggle('active');
 }
 
 function openLeadModal() {
@@ -13,7 +12,7 @@ function closeLeadModal() {
 
 function handleFormSubmit(e) {
     e.preventDefault();
-    alert('Заявка успешно отправлена! Мы свяжемся с вами в течение 5 минут.');
+    alert('Заявка отправлена! Свяжемся с вами в течение 5 минут.');
     closeLeadModal();
     e.target.reset();
 }
